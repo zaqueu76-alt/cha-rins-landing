@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chá de Rins - Landing Page</title>
+<style>
+  body { background: #000; color: #fff; font-family: Arial, sans-serif; margin:0; padding:0;}
+  .topo { background:#111; text-align:center; padding:15px; font-weight:bold; font-size:20px; color:gold; }
+  #contador { color:white; font-size:22px; font-weight:bold; }
+  .container { width:90%; margin:auto; padding:20px 0;}
+  .cta { background: limegreen; border-radius:30px; padding:15px 25px; color:black; text-align:center; font-size:22px; font-weight:bold; margin:25px auto; width:250px; cursor:pointer; animation:piscando 1s infinite; }
+  @keyframes piscando {0% {box-shadow:0 0 10px limegreen;} 50% {box-shadow:0 0 25px lime;} 100% {box-shadow:0 0 10px limegreen;}}
+  .beneficios { margin-top:30px;}
+  .beneficios h2 { color:gold; margin-bottom:10px;}
+  .beneficios li { margin:8px 0;}
+  .avaliacoes h2 { color:gold; margin-top:40px;}
+  .card { background:#111; padding:15px; border-radius:15px; margin:10px 0;}
+  .formulario { display:none; background:#111; padding:20px; border-radius:15px; margin-top:30px;}
+  .formulario input, .formulario select { width:100%; padding:12px; margin:10px 0; border-radius:10px; border:none; font-size:16px;}
+  .formulario button { width:100%; background:limegreen; color:black; font-weight:bold; padding:15px; border:none; border-radius:12px; margin-top:15px; font-size:18px; cursor:pointer; animation:piscando 1s infinite;}
+  .produto-img { display:block; margin:20px auto; max-width:300px; border-radius:15px;}
+</style>
+</head>
+<body>
+
+<div class="topo">
+  PROMOÇÃO LIMITADA! TERMINA EM: <span id="contador"></span>
+</div>
+
+<div class="container">
+  <h1 style="color: gold; text-align: center;">CHÁ DE RINS NATURAL</h1>
+
+  <!-- Imagem do produto -->
+  <img src="images/produto-rins.png" alt="Chá de Rins" class="produto-img">
+
+  <!-- Botão CTA -->
+  <div class="cta" onclick="abrirFormulario()">COMPRAR AGORA</div>
+
+  <!-- Benefícios -->
+  <div class="beneficios">
+    <h2>Benefícios do Chá</h2>
+    <ul>
+      <li>Ajuda na <strong>limpeza profunda dos rins</strong></li>
+      <li>Reduz <strong>inchaços corporais</strong></li>
+      <li>Auxilia no <strong>equilíbrio da pressão</strong></li>
+      <li>Melhora o <strong>fluxo urinário</strong></li>
+      <li>Desintoxicação <strong>geral do organismo</strong></li>
+      <li>Aumenta <strong>energia e bem-estar diário</strong></li>
+    </ul>
+  </div>
+
+  <!-- Avaliações -->
+  <div class="avaliacoes">
+    <h2>Avaliações de Clientes</h2>
+    <div class="card">⭐️⭐️⭐️⭐️⭐️<br>"Funcionou muito bem, senti diferença em 3 dias!"</div>
+    <div class="card">⭐️⭐️⭐️⭐️⭐️<br>"Ajudou-me com a pressão e com os inchaços."</div>
+    <div class="card">⭐️⭐️⭐️⭐️⭐️<br>"Recomendo! Produto muito bom e natural."</div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="formulario" id="formulario">
+    <h2 style="color: gold;">Preencha para Finalizar a Compra</h2>
+    <input type="text" id="nome" placeholder="Nome (obrigatório)">
+    <input type="text" id="numero" placeholder="Número de telefone">
+    <input type="text" id="bairro" placeholder="Bairro">
+    <input type="text" id="horario" placeholder="Horário para entrega">
+    <select id="unidades">
+      <option value="1">1 unidade - 999 MT</option>
+      <option value="2">2 unidades - 1499 MT</option>
+    </select>
+    <button onclick="enviarWhats()">ENVIAR PEDIDO</button>
+  </div>
+
+</div>
+
+<script>
+function abrirFormulario(){document.getElementById('formulario').style.display='block'; window.scrollTo(0, document.getElementById('formulario').offsetTop);}
+function enviarWhats(){
+let nome=document.getElementById('nome').value;
+let numero=document.getElementById('numero').value;
+let bairro=document.getElementById('bairro').value;
+let horario=document.getElementById('horario').value;
+let unidades=document.getElementById('unidades').value;
+let msg=`*Novo Pedido - Chá de Rins*%0A%0ANome: ${nome}%0ANúmero: ${numero}%0ABairro: ${bairro}%0AHorário: ${horario}%0AUnidades: ${unidades}%0A%0A1 unidade = 999 MT %0A2 unidades = 1499 MT`;
+window.open(`https://wa.me/25886846216?text=${msg}`);
+}
+function iniciarContador(){
+let destino=new Date().getTime()+24*60*60*1000;
+setInterval(function(){
+let agora=new Date().getTime();
+let diff=destino-agora;
+let h=Math.floor(diff/(1000*60*60));
+let m=Math.floor((diff%(1000*60*60))/(1000*60));
+let s=Math.floor((diff%(1000*60))/1000);
+document.getElementById('contador').innerText=`${h}h ${m}m ${s}s`;
+},1000);
+}
+iniciarContador();
+</script>
+
+</body>
+</html>
